@@ -3,6 +3,7 @@ package kodlama.io.rentACar.entities.concretes;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Table(name = "brands")
 //@Data //Getter ve Setter ikisini getirir. @Getter ya da @Setter ile degistirilebilir
 @Getter
