@@ -2,7 +2,7 @@ package kodlama.io.rentACar.entities.concretes;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import java.util.List;
 
 @Table(name = "brands")
 //@Data //Getter ve Setter ikisini getirir. @Getter ya da @Setter ile degistirilebilir
@@ -20,4 +20,7 @@ public class Brand {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "brand")
+    private List<Model> models;
 }
