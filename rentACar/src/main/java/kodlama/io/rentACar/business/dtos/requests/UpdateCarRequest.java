@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateBrandRequest {
+public class UpdateCarRequest {
 
     @NotNull
     @NotBlank
@@ -18,6 +18,15 @@ public class UpdateBrandRequest {
 
     @NotNull
     @NotBlank
+    @Size(min=4,max = 4)
+    private int modelYear;
+
+    @NotNull
+    @NotBlank
     @Size(min=3,max = 20)
-    private String name;
+    private String modelName;
+
+    @NotNull
+    @NotBlank
+    private Double dailyPrice;
 }
