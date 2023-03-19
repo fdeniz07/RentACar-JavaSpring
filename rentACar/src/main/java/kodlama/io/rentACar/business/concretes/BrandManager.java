@@ -5,6 +5,7 @@ import kodlama.io.rentACar.business.dtos.requests.CreateBrandRequest;
 import kodlama.io.rentACar.business.dtos.requests.UpdateBrandRequest;
 import kodlama.io.rentACar.business.dtos.responses.GetAllBrandsResponse;
 import kodlama.io.rentACar.business.dtos.responses.GetByIdBrandResponse;
+import kodlama.io.rentACar.business.rules.BrandBusinessRules;
 import kodlama.io.rentACar.core.utilities.mappers.ModelMapperService;
 import kodlama.io.rentACar.dataAccess.abstracts.BrandRepository;
 import kodlama.io.rentACar.entities.concretes.Brand;
@@ -22,6 +23,7 @@ public class BrandManager implements BrandService {
 
     private final BrandRepository brandRepository;
     private final ModelMapperService modelMapperService;
+    private BrandBusinessRules brandBusinessRules;
 
     //@AllArgsConstructor kullaninca bu kisma gerek kalmiyor
 //    @Autowired
@@ -36,34 +38,34 @@ public class BrandManager implements BrandService {
 
         /** ESKI YÖNTEM
 
-        List<GetAllBrandsResponse> brandResponse = new ArrayList<GetAllBrandsResponse>();
-        List<Brand> brands = brandRepository.findAll();
-        for (Brand brand : brands) {
-            GetAllBrandsResponse responseItem = new GetAllBrandsResponse();
-            responseItem.setId(brand.getId());
-            responseItem.setName(brand.getName());
+         List<GetAllBrandsResponse> brandResponse = new ArrayList<GetAllBrandsResponse>();
+         List<Brand> brands = brandRepository.findAll();
+         for (Brand brand : brands) {
+         GetAllBrandsResponse responseItem = new GetAllBrandsResponse();
+         responseItem.setId(brand.getId());
+         responseItem.setName(brand.getName());
 
-            brandResponse.add(responseItem);
-        }
+         brandResponse.add(responseItem);
+         }
 
-*/
+         */
 
         /** YENI YÖNTEM KISA AMA DAHA DA SADELESTIRILEBILIR
-        List<GetAllBrandsResponse> brandResponse1 = brands
-                                                            .stream()
-                                                            .map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class)).collect(Collectors.toList());
-        */
+         List<GetAllBrandsResponse> brandResponse1 = brands
+         .stream()
+         .map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class)).collect(Collectors.toList());
+         */
 
         /**YENI YÖNTEM - KISA HALI
-        List<GetAllBrandsResponse> brandResponse = brands
-                                                        .stream()
-                                                        .map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class)).toList();
-        return brandResponse;
-        */
+         List<GetAllBrandsResponse> brandResponse = brands
+         .stream()
+         .map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class)).toList();
+         return brandResponse;
+         */
 
         //YENI YÖNTEM EN KISA HALI
         return brands.stream()
-                     .map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class)).toList();
+                .map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class)).toList();
     }
 
     @Override
@@ -72,17 +74,19 @@ public class BrandManager implements BrandService {
         Brand brand = this.brandRepository.findById(id).orElseThrow(); // Bulamazsan hata firlat
 
         /** Kisaktacagiz
-        GetByIdBrandResponse response = this.modelMapperService.forResponse().map(brand,GetByIdBrandResponse.class);
-        return response;
-        */
+         GetByIdBrandResponse response = this.modelMapperService.forResponse().map(brand,GetByIdBrandResponse.class);
+         return response;
+         */
 
-        return this.modelMapperService.forResponse().map(brand,GetByIdBrandResponse.class);
+        return this.modelMapperService.forResponse().map(brand, GetByIdBrandResponse.class);
     }
 
     @Override
     public void add(CreateBrandRequest createBrandRequest) {
 
-        Brand brand = this.modelMapperService.forRequest().map(createBrandRequest,Brand.class); //Gelen kaynagi (source=request) --> Brand'e cevir
+        this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getName());
+
+        Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class); //Gelen kaynagi (source=request) --> Brand'e cevir
 
         //Model Mapper kullanmadan önce tüm nesneler bu sekilde manuel set ediliyordu. Kac tane field varsa.
 //        Brand brand = new Brand();
@@ -93,8 +97,9 @@ public class BrandManager implements BrandService {
 
     @Override
     public void update(UpdateBrandRequest updateBrandRequest) {
+        this.brandBusinessRules.checkIfBrandNameExists(updateBrandRequest.getName());
 
-        Brand brand = this.modelMapperService.forRequest().map(updateBrandRequest,Brand.class);
+        Brand brand = this.modelMapperService.forRequest().map(updateBrandRequest, Brand.class);
 
         this.brandRepository.save(brand); //Buradaki save'in add den farki id de oldugu icin insert degil update islemi yapar UpdateBrandRequest sayesinde
     }
