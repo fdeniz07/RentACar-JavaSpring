@@ -1,5 +1,6 @@
 package kodlama.io.rentACar.webApi.controllers;
 
+import jakarta.validation.Valid;
 import kodlama.io.rentACar.business.abstracts.BrandService;
 import kodlama.io.rentACar.business.dtos.requests.CreateBrandRequest;
 import kodlama.io.rentACar.business.dtos.requests.UpdateBrandRequest;
@@ -36,13 +37,13 @@ public class BrandsController {
 
     @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void add(@RequestBody() CreateBrandRequest createBrandRequest) {
+    public void add(@RequestBody() @Valid() CreateBrandRequest createBrandRequest) { // @Valid() hata kodlari detayini gizler
         this.brandService.add(createBrandRequest);
     }
 
 
     @PutMapping()
-    public void update(@RequestBody() UpdateBrandRequest updateBrandRequest) {
+    public void update(@RequestBody() @Valid() UpdateBrandRequest updateBrandRequest) {
         this.brandService.update(updateBrandRequest);
     }
 
