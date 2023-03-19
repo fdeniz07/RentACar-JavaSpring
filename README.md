@@ -3,4 +3,4 @@
 Kodlama.io Java Bootcamp 
 Trainer : Engin Demirog
 
- <img src="https://github.com/fdeniz07/RentACar-JavaSpring/blob/master/rentACar/images/Swagger.JPG" />
+ <img src="https://github.com/fdeniz07/RentACar-JavaSpring/blob/master/rentACar/img/Swagger.JPG" />
