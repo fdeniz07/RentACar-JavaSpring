@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateBrandRequest {
 
-    @NotNull
-    @NotBlank
+
     private int id;
 
     @NotNull

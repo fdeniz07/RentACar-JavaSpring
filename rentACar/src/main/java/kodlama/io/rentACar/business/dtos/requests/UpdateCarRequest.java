@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateCarRequest {
 
-    @NotNull
-    @NotBlank
+
     private int id;
 
     @NotNull
