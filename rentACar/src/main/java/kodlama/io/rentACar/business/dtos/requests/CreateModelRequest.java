@@ -17,7 +17,5 @@ public class CreateModelRequest {
     @Size(min=3,max = 20)
     private String name;
 
-    @NotNull
-    @NotBlank
-    private int brandId;
+    private int brand_id;
 }

@@ -26,7 +26,5 @@ public class CreateCarRequest {
     @NotBlank
     private Double dailyPrice;
 
-    @NotNull
-    @NotBlank
     private int modelId;
 }
