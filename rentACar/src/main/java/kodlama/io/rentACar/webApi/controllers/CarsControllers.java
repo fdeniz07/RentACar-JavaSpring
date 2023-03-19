@@ -3,13 +3,9 @@ package kodlama.io.rentACar.webApi.controllers;
 import jakarta.validation.Valid;
 import kodlama.io.rentACar.business.abstracts.CarService;
 import kodlama.io.rentACar.business.dtos.requests.CreateCarRequest;
-import kodlama.io.rentACar.business.dtos.requests.CreateModelRequest;
 import kodlama.io.rentACar.business.dtos.requests.UpdateCarRequest;
-import kodlama.io.rentACar.business.dtos.requests.UpdateModelRequest;
 import kodlama.io.rentACar.business.dtos.responses.GetAllCarsResponse;
-import kodlama.io.rentACar.business.dtos.responses.GetAllModelsResponse;
 import kodlama.io.rentACar.business.dtos.responses.GetByIdCarResponse;
-import kodlama.io.rentACar.business.dtos.responses.GetByIdModelResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +15,7 @@ import java.util.List;
 @RestController  //annotation
 @RequestMapping("/api/cars")
 @AllArgsConstructor
-public class CarControllers {
+public class CarsControllers {
 
     private CarService carService;
 
