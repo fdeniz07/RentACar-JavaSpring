@@ -51,6 +51,4 @@ public class BrandsController {
     public void delete( @RequestParam(name = "id")int id) {
         this.brandService.delete(id);
     }
-
-
 }
