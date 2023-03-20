@@ -12,9 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateCarRequest {
 
-    @NotNull
-    @NotBlank
-    @Size(min=4,max = 4)
     private int modelYear;
 
     @NotNull
@@ -22,8 +19,7 @@ public class CreateCarRequest {
     @Size(min=3,max = 20)
     private String modelName;
 
-    @NotNull
-    @NotBlank
+
     private Double dailyPrice;
 
     private int modelId;
