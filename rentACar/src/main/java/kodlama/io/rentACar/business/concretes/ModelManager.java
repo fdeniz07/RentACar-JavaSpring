@@ -33,7 +33,6 @@ public class ModelManager implements ModelService {
 
         return models.stream()
                 .map(model -> this.modelMapperService.forResponse().map(model, GetAllModelsResponse.class)).toList();
-
     }
 
     @Override
