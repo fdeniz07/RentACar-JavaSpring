@@ -97,10 +97,10 @@ public class BrandManager implements BrandService {
 
     @Override
     public void update(UpdateBrandRequest updateBrandRequest) {
-        this.brandBusinessRules.checkIfBrandNameExists(updateBrandRequest.getName());
+        //this.brandBusinessRules.checkIfBrandNameExists(updateBrandRequest.getName());
 
         Brand brand = this.modelMapperService.forRequest().map(updateBrandRequest, Brand.class);
-
+        brand.setId(0);
         this.brandRepository.save(brand); //Buradaki save'in add den farki id de oldugu icin insert degil update islemi yapar UpdateBrandRequest sayesinde
     }
 
