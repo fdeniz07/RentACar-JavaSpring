@@ -31,7 +31,7 @@ public class CarManager implements CarService {
         List<Car> cars = carRepository.findAll();
 
         return cars.stream()
-                .map(car -> this.modelMapperService.forResponse().map(cars, GetAllCarsResponse.class)).toList();
+                .map(car -> this.modelMapperService.forResponse().map(car, GetAllCarsResponse.class)).toList();
     }
 
     @Override
