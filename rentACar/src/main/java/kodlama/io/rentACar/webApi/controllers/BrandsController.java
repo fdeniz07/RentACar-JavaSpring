@@ -31,7 +31,7 @@ public class BrandsController {
     }
 
     @GetMapping("/{id}")
-    public GetByIdBrandResponse getById(@PathVariable int id) { //@PathVariable  git id yi {} path den oku demek
+    public GetByIdBrandResponse getById(@PathVariable @RequestParam(name = "id") int id) { //@PathVariable  git id yi {} path den oku demek
         return brandService.getById(id);
     }
 
@@ -48,7 +48,7 @@ public class BrandsController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(int id) {
+    public void delete( @RequestParam(name = "id")int id) {
         this.brandService.delete(id);
     }
 
