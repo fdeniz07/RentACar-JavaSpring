@@ -45,12 +45,13 @@ public class CarManager implements CarService {
         this.carBusinessRules.checkIfCarModelYearExists(createCarRequest.getModelYear());
 
         Car car = this.modelMapperService.forRequest().map(createCarRequest, Car.class);
+        car.setId(0);
         this.carRepository.save(car);
     }
 
     @Override
     public void update(UpdateCarRequest updateCarRequest) {
-        this.carBusinessRules.checkIfCarModelYearExists(updateCarRequest.getModelYear());
+        //this.carBusinessRules.checkIfCarModelYearExists(updateCarRequest.getModelYear());
 
         Car car = this.modelMapperService.forRequest().map(updateCarRequest, Car.class);
         this.carRepository.save(car);
