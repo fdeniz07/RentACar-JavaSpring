@@ -46,12 +46,13 @@ public class ModelManager implements ModelService {
         this.modelBusinessRules.checkIfNameExists(createModelRequest.getName());
 
         Model model = this.modelMapperService.forRequest().map(createModelRequest, Model.class);
+        model.setId(0);
         this.modelRepository.save(model);
     }
 
     @Override
     public void update(UpdateModelRequest updateModelRequest) {
-        this.modelBusinessRules.checkIfNameExists(updateModelRequest.getName());
+        //this.modelBusinessRules.checkIfNameExists(updateModelRequest.getName());
 
         Model model = this.modelMapperService.forRequest().map(updateModelRequest, Model.class);
         this.modelRepository.save(model);
