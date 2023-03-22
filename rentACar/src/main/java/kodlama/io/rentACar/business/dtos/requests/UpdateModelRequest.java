@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateModelRequest {
 
-
     private int id;
 
     @NotNull
